@@ -2,12 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./Routes/users");
-const videoRoute = require("./Routes/comments");
-const commentRoute = require("./Routes/videos");
+const commentRoute = require("./Routes/comments");
+const videoRoute = require("./Routes/videos");
 const authRoute = require("./Routes/auth");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 dotenv.config();
+
+// Same as json parser we used cookie parser to send token using cookies
+app.use(cookieParser());
 
 // Add this line to parse JSON bodies
 app.use(express.json());
@@ -24,6 +28,18 @@ app.use("/api/users", userRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/videos", videoRoute);
 app.use("/api/auth", authRoute);
+
+// Global error handler
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong!";
+
+  res.status(status).json({
+    success: false,
+    status: status,
+    message: message,
+  });
+});
 
 app.listen(5001, () => {
   connect();
