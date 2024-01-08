@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); // npm install dotenv
 const userRoute = require("./Routes/users");
 const commentRoute = require("./Routes/comments");
 const videoRoute = require("./Routes/videos");
@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 dotenv.config();
 
-// Same as json parser we used cookie parser to send token using cookies
+// Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
 app.use(cookieParser());
 
 // Add this line to parse JSON bodies

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Video = require("../models/Video");
 
 module.exports = {
   // get all users
@@ -129,8 +130,55 @@ module.exports = {
   },
 
   // like a video
-  likeVideo: (req, res) => {},
+  likeVideo: async (req, res) => {
+    const userId = req.user.id;
+    const videoId = req.params.videoId;
+
+    try {
+      const video = await Video.findByIdAndUpdate(
+        videoId,
+        { $addToSet: { likes: userId }, $pull: { dislikes: userId } }, //makes sure the id is in the array only once, instead of using $push where it will push even if it is dublicated value
+
+        { new: true }
+      );
+
+      res.json({
+        status: 200,
+        message: "The Like has been added!",
+        video: video,
+      });
+    } catch (error) {
+      res.json({
+        status: 500,
+        message: "Something went wrong!",
+        error: error,
+      });
+    }
+  },
 
   //dislike a video
-  dislikeVideo: (req, res) => {},
+  dislikeVideo: async (req, res) => {
+    const userId = req.user.id;
+    const videoId = req.params.videoId;
+
+    try {
+      const video = await Video.findByIdAndUpdate(
+        videoId,
+        { $pull: { likes: userId }, $addToSet: { dislikes: userId } }, //makes sure the id is in the array only once, instead of using $push where it will push even if it is dublicated value
+        { new: true }
+      );
+
+      res.json({
+        status: 200,
+        message: "The Dislike has been added!",
+        video: video,
+      });
+    } catch (error) {
+      res.json({
+        status: 500,
+        message: "Something went wrong!",
+        error: error,
+      });
+    }
+  },
 };

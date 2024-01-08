@@ -1,8 +1,12 @@
 const express = require("express");
 const commentController = require("../Controllers/comment");
 
+const { verifyToken } = require("../verifyToken");
+
 const router = express.Router();
 
-router.get("/test", commentController.test);
+router.get("/:videoId", verifyToken, commentController.getComments);
+router.post("/", verifyToken, commentController.createComment);
+router.delete("/:id", verifyToken, commentController.deleteComment);
 
 module.exports = router;

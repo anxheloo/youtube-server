@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 
 module.exports = {
   verifyToken: (req, res, next) => {
