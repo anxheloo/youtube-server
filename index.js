@@ -6,9 +6,19 @@ const commentRoute = require("./Routes/comments");
 const videoRoute = require("./Routes/videos");
 const authRoute = require("./Routes/auth");
 const cookieParser = require("cookie-parser");
+const cors = require("cors"); // cors configuration
 
 const app = express();
 dotenv.config();
+
+// Add this line to configure cors
+app.use(
+  cors({
+    // origin: "http://192.168.1.236:3000",
+    origin: "http://localhost:3000",
+    // origin: "http://172.30.160.1:3000",
+  })
+);
 
 // Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
 app.use(cookieParser());

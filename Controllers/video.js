@@ -167,7 +167,8 @@ module.exports = {
     try {
       const videos = await Video.aggregate([{ $sample: { size: 20 } }]);
 
-      res.status(200).json({
+      res.json({
+        status: 200,
         videos: videos,
       });
     } catch (error) {
