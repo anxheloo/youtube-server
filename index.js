@@ -22,8 +22,12 @@ app.use(
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
     // origin: "https://inquisitive-gnome-eee029.netlify.app/",
-    credentials: true, // Set to true to pass the header, otherwise it is omitted.
+    // credentials: true, // Set to true to pass the header, otherwise it is omitted.
     // exposedHeaders: ["Set-Cookie"],
+
+    origin: "https://glittering-gecko-f41e0f.netlify.app/",
+    credentials: true,
+    exposedHeaders: ["Set-Cookie"],
   })
 );
 
