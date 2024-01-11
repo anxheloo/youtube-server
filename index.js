@@ -17,15 +17,14 @@ app.use(compression());
 
 // Add this line to configure cors
 app.use(
-  cors()
-  //   {
-  //   // origin: "http://192.168.1.236:3000",
-  //   // origin: "http://localhost:3000",
-  //   // origin: "http://172.30.160.1:3000",
-  //   // origin: "https://inquisitive-gnome-eee029.netlify.app/",
-  //   credentials: true,
-  //   // exposedHeaders: ["Set-Cookie"],
-  // }
+  cors({
+    // origin: "http://192.168.1.236:3000",
+    // origin: "http://localhost:3000",
+    // origin: "http://172.30.160.1:3000",
+    // origin: "https://inquisitive-gnome-eee029.netlify.app/",
+    // credentials: true,
+    // exposedHeaders: ["Set-Cookie"],
+  })
 );
 
 // Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
