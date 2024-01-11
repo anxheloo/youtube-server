@@ -79,8 +79,8 @@ module.exports = {
         return res
           .cookie("access_token", token, {
             httpOnly: true,
-            secure: true, // Also set secure for HTTPS environments
-            sameSite: "None",
+            // secure: true, // Also set secure for HTTPS environments
+            // sameSite: "None",
             // sameSite: "Lax",
             // path: "/",
           })
