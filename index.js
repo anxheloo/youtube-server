@@ -22,7 +22,7 @@ app.use(
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
     // origin: "https://inquisitive-gnome-eee029.netlify.app/",
-    // credentials: true,
+    credentials: true,
     // exposedHeaders: ["Set-Cookie"],
   })
 );
