@@ -25,7 +25,7 @@ app.use(
     // credentials: true, // Set to true to pass the header, otherwise it is omitted.
     // exposedHeaders: ["Set-Cookie"],
 
-    origin: "https://glittering-gecko-f41e0f.netlify.app/",
+    origin: "https://glittering-gecko-f41e0f.netlify.app",
     credentials: true,
     exposedHeaders: ["Set-Cookie"],
   })
