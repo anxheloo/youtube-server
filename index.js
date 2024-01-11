@@ -58,7 +58,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5001, () => {
+const PORT = process.env.PORT || 5002;
+
+app.listen(PORT, () => {
   connect();
   console.log("CONNCETED");
 });
