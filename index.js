@@ -7,16 +7,23 @@ const videoRoute = require("./Routes/videos");
 const authRoute = require("./Routes/auth");
 const cookieParser = require("cookie-parser");
 const cors = require("cors"); // cors configuration
+const compression = require("compression"); // used for deployment to compress the routes
 
 const app = express();
 dotenv.config();
+
+// Compress all routes
+app.use(compression());
 
 // Add this line to configure cors
 app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
+    // origin: "https://inquisitive-gnome-eee029.netlify.app/",
+    credentials: true,
+    // exposedHeaders: ["Set-Cookie"],
   })
 );
 

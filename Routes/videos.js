@@ -4,11 +4,7 @@ const { verifyToken } = require("../verifyToken");
 
 const router = express.Router();
 
-router.get(
-  "/subscribed-channel-videos",
-  verifyToken,
-  videoController.subscribedChannelVideos
-);
+router.get("/subscriptions", verifyToken, videoController.subscriptions);
 router.get("/trend", videoController.trend);
 router.get("/random", videoController.random);
 router.get("/tags", videoController.getByTag);

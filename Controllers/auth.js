@@ -70,10 +70,7 @@ module.exports = {
       if (decryptedPassword) {
         // Passwords match, you can proceed with login logic
 
-        const token = await jwt.sign(
-          { id: existingUser._id },
-          process.env.SECRET
-        );
+        const token = jwt.sign({ id: existingUser._id }, process.env.SECRET);
 
         // Create a new object without the 'password' field, both ways below work.
         const { password, ...userWithoutPassword } = existingUser._doc;
@@ -82,11 +79,16 @@ module.exports = {
         return res
           .cookie("access_token", token, {
             httpOnly: true,
+            secure: true, // Also set secure for HTTPS environments
+            sameSite: "None",
+            // sameSite: "Lax",
+            // path: "/",
           })
           .status(200)
           .json({
             message: "Login successful",
             user: userWithoutPassword,
+            token: token,
           });
       } else {
         // Passwords do not match

@@ -169,6 +169,7 @@ module.exports = {
 
       res.json({
         status: 200,
+        message: "These are random videos!",
         videos: videos,
       });
     } catch (error) {
@@ -181,7 +182,7 @@ module.exports = {
   },
 
   //get subscribed videos of the current logged in user
-  subscribedChannelVideos: async (req, res) => {
+  subscriptions: async (req, res) => {
     try {
       const user = await User.findById(req.user.id);
       const subscribedChannels = user.subscribedUsers;
@@ -196,8 +197,9 @@ module.exports = {
 
       console.log("This is list:", list.flat());
 
-      return res.status(200).json({
-        subscribedVideos: list.flat().sort((a, b) => b.createdAt - a.createdAt), // sort from latest
+      return res.json({
+        status: 200,
+        videos: list.flat().sort((a, b) => b.createdAt - a.createdAt), // sort from latest
       });
     } catch (error) {
       console.log(error);
@@ -217,7 +219,9 @@ module.exports = {
       //   return res.json({ status: 404, message: "Video not found!" });
       // }
 
-      res.status(200).json({
+      res.json({
+        status: 200,
+        message: "These are trends videos!",
         videos,
       });
     } catch (error) {
