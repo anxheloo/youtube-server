@@ -81,6 +81,7 @@ module.exports = {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
+            maxAge: 86400000, // Cookie will expire in 24 hours
             // sameSite: "Lax",
             // path: "/",
           })

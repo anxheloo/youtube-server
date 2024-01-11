@@ -27,11 +27,11 @@ app.use(
   })
 );
 
-// Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
-app.use(cookieParser());
-
 // Add this line to parse JSON bodies
 app.use(express.json());
+
+// Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
+app.use(cookieParser());
 
 const connect = () => {
   mongoose
