@@ -21,11 +21,11 @@ app.use(
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    // origin: "https://inquisitive-gnome-eee029.netlify.app/",
+    origin: "https://fabulous-blini-23e559.netlify.app/",
     // credentials: true, // Set to true to pass the header, otherwise it is omitted.
     // exposedHeaders: ["Set-Cookie"],
 
-    origin: "https://cheerful-longma-c1b789.netlify.app",
+    // origin: "https://cheerful-longma-c1b789.netlify.app",
     credentials: true,
     exposedHeaders: ["Set-Cookie"],
   })
