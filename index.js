@@ -21,7 +21,7 @@ app.use(
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://dainty-seahorse-2fa956.netlify.app",
+    origin: "https://reliable-blancmange-6b34e2.netlify.app",
     // credentials: true, // Set to true to pass the header, otherwise it is omitted.
     // exposedHeaders: ["Set-Cookie"],
 
