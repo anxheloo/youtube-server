@@ -103,8 +103,62 @@ module.exports = {
     }
   },
 
-  google: (req, res) => {
+  google: async (req, res) => {
     try {
-    } catch (error) {}
+      //1.We first try to find the user by email
+      const existingUser = await User.findOne({ email: req.body.email });
+
+      //2.If it exists sign the token, set the cookie and return the status and json with user, message and token
+      if (existingUser) {
+        const token = jwt.sign({ id: existingUser._id }, process.env.SECRET);
+
+        return res
+          .cookie("access_token", token, {
+            httpOnly: true,
+            secure: true, // Also set secure for HTTPS environments
+            sameSite: "None",
+            // maxAge: 86400000, // Cookie will expire in 24 hours
+            // sameSite: "Lax",
+            // path: "/",
+          })
+          .status(200)
+          .json({
+            message: "Login successful",
+            user: existingUser._doc,
+            token: token,
+          });
+      }
+      //3.Of use not exists, create the user, save it, sign the token and return everything else
+      else {
+        const newUser = new User({
+          name: req.body.displayName,
+          email: req.body.email,
+          img: req.body.photoURL,
+          fromGoogle: true,
+        });
+
+        const savedUser = await newUser.save();
+        const token = jwt.sign({ id: savedUser._id }, process.env.SECRET);
+
+        return res
+          .cookie("access_token", token, {
+            httpOnly: true,
+            secure: true, // Also set secure for HTTPS environments
+            sameSite: "None",
+            // maxAge: 86400000, // Cookie will expire in 24 hours
+            // sameSite: "Lax",
+            // path: "/",
+          })
+          .status(200)
+          .json({
+            message: "User Created successful, logged in!",
+            user: savedUser._doc,
+            token: token,
+          });
+      }
+    } catch (error) {
+      console.error("Error during login: ", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
   },
 };
