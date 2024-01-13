@@ -76,6 +76,8 @@ module.exports = {
         const { password, ...userWithoutPassword } = existingUser._doc;
         // const { password, ...userWithoutPassword } = existingUser.toObject();
 
+        console.log("THis is user:", existingUser._doc)
+
         return res
           .cookie("access_token", token, 
           {

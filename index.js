@@ -13,25 +13,25 @@ const app = express();
 dotenv.config();
 
 // Compress all routes
-app.use(compression());
+// app.use(compression());
 
 // Add this line to configure cors
 app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
-    // origin: "http://localhost:3000",
+    origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://sage-sopapillas-ef411f.netlify.app",
+    // origin: "https://sage-sopapillas-ef411f.netlify.app",
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
   })
 );
 
-    app.use((req, res, next) => {
-      res.header("Cross-Origin-Embedder-Policy", "require-corp");
-      res.header("Cross-Origin-Opener-Policy", "same-origin");
-      // next();
-    });
+    // app.use((req, res, next) => {
+    //   res.header("Cross-Origin-Embedder-Policy", "require-corp");
+    //   res.header("Cross-Origin-Opener-Policy", "same-origin");
+    //   // next();
+    // });
     
 
 

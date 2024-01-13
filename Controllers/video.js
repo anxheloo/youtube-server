@@ -167,6 +167,8 @@ module.exports = {
     try {
       const videos = await Video.aggregate([{ $sample: { size: 20 } }]);
 
+      console.log("These are videos:", videos)
+
       res.json({
         status: 200,
         message: "These are random videos!",
