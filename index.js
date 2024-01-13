@@ -22,13 +22,18 @@ app.use(
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
     origin: "https://bucolic-moxie-9b5d9c.netlify.app",
-    // credentials: true, // Set to true to pass the header, otherwise it is omitted.
-    // exposedHeaders: ["Set-Cookie"],
 
     credentials: true,
-    exposedHeaders: ["Set-Cookie"],
+    // exposedHeaders: ["Set-Cookie"],
   })
 );
+
+// Add this line to set COOP header
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin, same-origin-allow-popups");
+  next();
+});
+
 
 // Add this line to parse JSON bodies
 app.use(express.json());

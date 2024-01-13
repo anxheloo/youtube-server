@@ -77,14 +77,16 @@ module.exports = {
         // const { password, ...userWithoutPassword } = existingUser.toObject();
 
         return res
-          .cookie("access_token", token, {
+          .cookie("access_token", token, 
+          {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
-            maxAge: 86400000, // Cookie will expire in 24 hours
-            // sameSite: "Lax",
-            // path: "/",
-          })
+          //   maxAge: 86400000, // Cookie will expire in 24 hours
+          //   // sameSite: "Lax",
+          //   // path: "/",
+          }
+          )
           .status(200)
           .json({
             message: "Login successful",
@@ -158,7 +160,7 @@ module.exports = {
       }
     } catch (error) {
       console.error("Error during login: ", error);
-      res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).json({ message: "Internal Server Error", error: `This is error:${error}` });
     }
   },
 };
