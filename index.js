@@ -29,7 +29,8 @@ app.use(
 
 // Add this line to set COOP header
 app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin, same-origin-allow-popups");
+  //res.setHeader("Cross-Origin-Opener-Policy", "same-origin, same-origin-allow-popups");
+  res.setHeader("Cross-Origin-Opener-Policy","same-origin");
   next();
 });
 
