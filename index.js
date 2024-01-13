@@ -21,8 +21,7 @@ app.use(
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://bucolic-moxie-9b5d9c.netlify.app",
-
+    origin: "https://thunderous-crostata-d33076.netlify.app",
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
   })
