@@ -27,12 +27,12 @@ app.use(
   })
 );
 
-// Add this line to set COOP header
-app.use((req, res, next) => {
-  //res.setHeader("Cross-Origin-Opener-Policy", "same-origin, same-origin-allow-popups");
-  res.setHeader("Cross-Origin-Opener-Policy","same-origin");
-  next();
-});
+    app.use((req, res, next) => {
+      res.header("Cross-Origin-Embedder-Policy", "require-corp");
+      res.header("Cross-Origin-Opener-Policy", "same-origin");
+      // next();
+    });
+    
 
 
 // Add this line to parse JSON bodies
