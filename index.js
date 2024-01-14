@@ -23,7 +23,7 @@ app.use(
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://beautiful-bavarois-3448b8.netlify.app",
+    origin: "https://rad-chebakia-7fb93b.netlify.app",
     // origin:null,
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
