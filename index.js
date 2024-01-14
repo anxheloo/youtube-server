@@ -21,9 +21,9 @@ dotenv.config();
 app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    // origin: "https://glistening-dango-035dbd.netlify.app",
+    // origin: "https://extraordinary-gumption-815f6d.netlify.app",
     // origin:null,
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
