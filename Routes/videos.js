@@ -15,7 +15,7 @@ router.get("/search", videoController.search);
 router.post("/", verifyToken, videoController.postVideo);
 router.put("/:id", verifyToken, videoController.updateVideo);
 router.get("/", videoController.getAllVideos);
-router.get("/:id", verifyToken, videoController.getVideo);
+router.get("/:id", videoController.getVideo);
 router.delete("/:id", verifyToken, videoController.deleteVideo);
 router.put("/view/:id", videoController.addView);
 
