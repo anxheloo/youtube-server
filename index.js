@@ -23,21 +23,18 @@ app.use(
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://rad-chebakia-7fb93b.netlify.app",
+    origin: "https://statuesque-alpaca-443c2a.netlify.app",
     // origin:null,
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
   })
 );
 
-
 // Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
 app.use(cookieParser());
 
-
 // Add this line to parse JSON bodies
 app.use(express.json());
-
 
 const connect = () => {
   mongoose
