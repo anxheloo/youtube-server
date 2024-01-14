@@ -76,19 +76,18 @@ module.exports = {
         const { password, ...userWithoutPassword } = existingUser._doc;
         // const { password, ...userWithoutPassword } = existingUser.toObject();
 
-        console.log("THis is user:", existingUser._doc)
+        console.log("THis is user:", existingUser._doc);
 
         return res
-          .cookie("access_token", token, 
-          {
+          .cookie("access_token", token, {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
-          //   maxAge: 86400000, // Cookie will expire in 24 hours
-          //   // sameSite: "Lax",
-          //   // path: "/",
-          }
-          )
+            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
+            //   maxAge: 86400000, // Cookie will expire in 24 hours
+            //   // sameSite: "Lax",
+            //   // path: "/",
+          })
           .status(200)
           .json({
             message: "Login successful",
@@ -112,17 +111,21 @@ module.exports = {
       //1.We first try to find the user by email
       const existingUser = await User.findOne({ email: req.body.email });
 
-      console.log("This is existingUser:", existingUser)
+      console.log("This is existingUser:", existingUser);
 
       //2.If it exists sign the token, set the cookie and return the status and json with user, message and token
       if (existingUser) {
-        const token = await jwt.sign({ id: existingUser._id }, process.env.SECRET);
+        const token = await jwt.sign(
+          { id: existingUser._id },
+          process.env.SECRET
+        );
 
         return res
           .cookie("access_token", token, {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
+            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/", // Set to your Netlify domain
             // maxAge: 86400000, // Cookie will expire in 24 hours
             // sameSite: "Lax",
             // path: "/",
@@ -132,9 +135,11 @@ module.exports = {
             message: "Login successful",
             user: existingUser._doc,
             token: token,
+            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
           });
-      }else { //3.Of use not exists, create the user, save it, sign the token and return everything else
-       
+      } else {
+        //3.Of use not exists, create the user, save it, sign the token and return everything else
+
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
@@ -142,12 +147,12 @@ module.exports = {
           fromGoogle: true,
         });
 
-         console.log("This is new User:", newUser)
+        console.log("This is new User:", newUser);
 
         const savedUser = await newUser.save();
         const token = jwt.sign({ id: savedUser._id }, process.env.SECRET);
 
-        console.log("Saved user.id:", savedUser._id)
+        console.log("Saved user.id:", savedUser._id);
 
         return res
           .cookie("access_token", token, {
@@ -167,7 +172,12 @@ module.exports = {
       }
     } catch (error) {
       console.error("Error during login: ", error);
-      res.status(500).json({ message: "Internal Server Error", error: `This is error:${error}` });
+      res
+        .status(500)
+        .json({
+          message: "Internal Server Error",
+          error: `This is error:${error}`,
+        });
     }
   },
 };
