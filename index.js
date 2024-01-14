@@ -22,8 +22,8 @@ app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
     // origin: "http://localhost:3000",
-    // origin: "http://172.30.160.1:3000",
-    origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
+    origin: "http://172.30.160.1:3000",
+    // origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
     // Additional options
