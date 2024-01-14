@@ -4,9 +4,12 @@ const { verifyToken } = require("../verifyToken");
 
 const router = express.Router();
 
-router.get("/subscriptions", verifyToken, videoController.subscriptions);
-router.get("/trend", videoController.trend);
-router.get("/random", videoController.random);
+router.post("/subscriptions", verifyToken, videoController.subscriptions);
+// router.get("/subscriptions", verifyToken, videoController.subscriptions);
+router.post("/trend", videoController.trend);
+// router.get("/trend", videoController.trend);
+router.post("/random", videoController.random);
+// router.get("/random", videoController.random);
 router.get("/tags", videoController.getByTag);
 router.get("/search", videoController.search);
 router.post("/", verifyToken, videoController.postVideo);

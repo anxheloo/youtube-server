@@ -12,6 +12,8 @@ const compression = require("compression"); // used for deployment to compress t
 const app = express();
 dotenv.config();
 
+// app.use(cors())
+
 // Compress all routes
 // app.use(compression());
 
@@ -19,27 +21,23 @@ dotenv.config();
 app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
-    // origin: "http://localhost:3000",
+    origin: "http://localhost:3000",
     // origin: "http://172.30.160.1:3000",
-    origin: "https://glistening-dango-035dbd.netlify.app",
+    // origin: "https://glistening-dango-035dbd.netlify.app",
+    // origin:null,
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
   })
 );
 
-    // app.use((req, res, next) => {
-    //   res.header("Cross-Origin-Embedder-Policy", "require-corp");
-    //   res.header("Cross-Origin-Opener-Policy", "same-origin");
-    //   // next();
-    // });
-    
+
+// Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
+app.use(cookieParser());
 
 
 // Add this line to parse JSON bodies
 app.use(express.json());
 
-// Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
-app.use(cookieParser());
 
 const connect = () => {
   mongoose

@@ -112,9 +112,11 @@ module.exports = {
       //1.We first try to find the user by email
       const existingUser = await User.findOne({ email: req.body.email });
 
+      console.log("This is existingUser:", existingUser)
+
       //2.If it exists sign the token, set the cookie and return the status and json with user, message and token
       if (existingUser) {
-        const token = jwt.sign({ id: existingUser._id }, process.env.SECRET);
+        const token = await jwt.sign({ id: existingUser._id }, process.env.SECRET);
 
         return res
           .cookie("access_token", token, {
@@ -131,18 +133,21 @@ module.exports = {
             user: existingUser._doc,
             token: token,
           });
-      }
-      //3.Of use not exists, create the user, save it, sign the token and return everything else
-      else {
+      }else { //3.Of use not exists, create the user, save it, sign the token and return everything else
+       
         const newUser = new User({
-          name: req.body.displayName,
+          name: req.body.name,
           email: req.body.email,
           img: req.body.photoURL,
           fromGoogle: true,
         });
 
+         console.log("This is new User:", newUser)
+
         const savedUser = await newUser.save();
         const token = jwt.sign({ id: savedUser._id }, process.env.SECRET);
+
+        console.log("Saved user.id:", savedUser._id)
 
         return res
           .cookie("access_token", token, {

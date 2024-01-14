@@ -167,7 +167,7 @@ module.exports = {
     try {
       const videos = await Video.aggregate([{ $sample: { size: 20 } }]);
 
-      console.log("These are videos:", videos)
+      // console.log("These are videos:", videos)
 
       res.json({
         status: 200,
@@ -189,7 +189,7 @@ module.exports = {
       const user = await User.findById(req.user.id);
       const subscribedChannels = user.subscribedUsers;
 
-      console.log("this is subscribedChannels:", subscribedChannels);
+      // console.log("this is subscribedChannels:", subscribedChannels);
 
       const list = await Promise.all(
         subscribedChannels.map((channelId) => {
@@ -197,7 +197,7 @@ module.exports = {
         })
       );
 
-      console.log("This is list:", list.flat());
+      // console.log("This is list:", list.flat());
 
       return res.json({
         status: 200,

@@ -22,13 +22,15 @@ module.exports = {
 
       const existingUser = await User.findById(userId);
 
+        const { password, ...userWithoutPassword } = existingUser._doc;
+
       if (!existingUser) {
         res
           .status(401)
           .json({ message: "User with id ${userId} doesnt exists!" });
       }
 
-      res.status(200).json({ message: "THis is your user:", existingUser });
+      res.status(200).json({ message: "THis is your user:",userWithoutPassword });
     } catch (error) {
       console.log("THis is error:", error);
 
