@@ -27,8 +27,8 @@ app.use(
     credentials: true,
     exposedHeaders: ["Set-Cookie"],
     // Additional options
-    sameSite: "None", // You might need to adjust this based on browser compatibility
-    secure: true,
+    // sameSite: "None", // You might need to adjust this based on browser compatibility
+    // secure: true,
   })
 );
 
