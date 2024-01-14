@@ -83,7 +83,7 @@ module.exports = {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
-            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
+            // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
             //   maxAge: 86400000, // Cookie will expire in 24 hours
             //   // sameSite: "Lax",
             //   // path: "/",
@@ -125,7 +125,7 @@ module.exports = {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
-            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/", // Set to your Netlify domain
+            // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/", // Set to your Netlify domain
             // maxAge: 86400000, // Cookie will expire in 24 hours
             // sameSite: "Lax",
             // path: "/",
@@ -135,7 +135,7 @@ module.exports = {
             message: "Login successful",
             user: existingUser._doc,
             token: token,
-            domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
+            // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
           });
       } else {
         //3.Of use not exists, create the user, save it, sign the token and return everything else
@@ -172,12 +172,10 @@ module.exports = {
       }
     } catch (error) {
       console.error("Error during login: ", error);
-      res
-        .status(500)
-        .json({
-          message: "Internal Server Error",
-          error: `This is error:${error}`,
-        });
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: `This is error:${error}`,
+      });
     }
   },
 };
