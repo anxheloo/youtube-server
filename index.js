@@ -25,7 +25,7 @@ app.use(
     // origin: "http://172.30.160.1:3000",
     origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
     credentials: true,
-    exposedHeaders: ["Set-Cookie"],
+    // exposedHeaders: ["Set-Cookie"],
     // Additional options
     // sameSite: "None", // You might need to adjust this based on browser compatibility
     // secure: true,
