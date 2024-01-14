@@ -84,7 +84,7 @@ module.exports = {
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
             // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
-            //   maxAge: 86400000, // Cookie will expire in 24 hours
+            maxAge: 86400000, // Cookie will expire in 24 hours
             //   // sameSite: "Lax",
             //   // path: "/",
           })
@@ -126,7 +126,7 @@ module.exports = {
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
             // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/", // Set to your Netlify domain
-            // maxAge: 86400000, // Cookie will expire in 24 hours
+            maxAge: 86400000, // Cookie will expire in 24 hours
             // sameSite: "Lax",
             // path: "/",
           })
@@ -136,6 +136,7 @@ module.exports = {
             user: existingUser._doc,
             token: token,
             // domain: "https://vermillion-gumdrop-dcc65b.netlify.app/",
+            maxAge: 86400000, // Cookie will expire in 24 hours
           });
       } else {
         //3.Of use not exists, create the user, save it, sign the token and return everything else
@@ -159,7 +160,7 @@ module.exports = {
             httpOnly: true,
             secure: true, // Also set secure for HTTPS environments
             sameSite: "None",
-            // maxAge: 86400000, // Cookie will expire in 24 hours
+            maxAge: 86400000, // Cookie will expire in 24 hours
             // sameSite: "Lax",
             // path: "/",
           })
