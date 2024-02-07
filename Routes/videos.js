@@ -1,32 +1,16 @@
 const express = require("express");
 const videoController = require("../Controllers/video");
 const { verifyToken } = require("../verifyToken");
-
 const router = express.Router();
-
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    return cb(null, "../files");
-  },
-  filename: function (req, file, cb) {
-    return cb(null, `${Date.now()}_${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
-
-// upload.fields(["image","video"])
+const videoUpload = require("../videoUpload");
 
 router.get("/", videoController.getAllVideos);
 router.get("/tags", videoController.getByTag);
 router.get("/search", videoController.search);
 router.get("/:id", videoController.getVideo);
 router.post(
-  "/",
-  //   verifyToken,
-  //   upload.single("file"),
-  upload.fields([
+  "/upload",
+  videoUpload.fields([
     { name: "video", maxCount: 1 },
     { name: "image", maxCount: 1 },
   ]),
