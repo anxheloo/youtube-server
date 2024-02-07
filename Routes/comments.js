@@ -5,7 +5,7 @@ const { verifyToken } = require("../verifyToken");
 
 const router = express.Router();
 
-router.get("/:videoId", verifyToken, commentController.getComments);
+router.get("/:videoId", commentController.getComments);
 router.post("/", verifyToken, commentController.createComment);
 router.delete("/:id", verifyToken, commentController.deleteComment);
 

@@ -22,15 +22,23 @@ module.exports = {
 
       const existingUser = await User.findById(userId);
 
+      console.log("this is existingUser:", existingUser);
+
+      if (existingUser) {
         const { password, ...userWithoutPassword } = existingUser._doc;
+
+        console.log("this is userWithoutPassword :", userWithoutPassword);
+
+        res
+          .status(200)
+          .json({ message: "THis is your user:", userWithoutPassword });
+      }
 
       if (!existingUser) {
         res
           .status(401)
           .json({ message: "User with id ${userId} doesnt exists!" });
       }
-
-      res.status(200).json({ message: "THis is your user:",userWithoutPassword });
     } catch (error) {
       console.log("THis is error:", error);
 
@@ -99,15 +107,30 @@ module.exports = {
     console.log("Inside subscribeUser");
 
     try {
-      await User.findByIdAndUpdate(req.user.id, {
-        $push: { subscribedUsers: req.params.id },
-      });
+      const existingUser = await User.findByIdAndUpdate(
+        req.user.id,
 
-      await User.findByIdAndUpdate(req.params.id, {
+        // { $addToSet: { subscribedUsers: req.params.id }, },
+        {
+          $push: { subscribedUsers: req.params.id },
+        },
+        { new: true }
+      );
+
+      console.log("Inside subscribe, existinguser:", existingUser);
+
+      const existingChannel = await User.findByIdAndUpdate(req.params.id, {
         $inc: { subscribers: 1 },
       });
 
-      res.status(200).json({ message: "Subscription succesfull!" });
+      console.log("Inside subscribe, existingChannel:", existingChannel);
+
+      const { password, ...userWithoutPassword } = existingUser._doc;
+
+      res.status(200).json({
+        message: "Subscription succesfull!",
+        user: userWithoutPassword,
+      });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Something went wrong!", error });
@@ -117,15 +140,28 @@ module.exports = {
   // unsubscribe a user
   unsubscribeUser: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(req.user.id, {
-        $pull: { subscribedUsers: req.params.id },
-      });
+      const existingUser = await User.findByIdAndUpdate(
+        req.user.id,
+        {
+          $pull: { subscribedUsers: req.params.id },
+        },
+        { new: true }
+      );
 
-      await User.findByIdAndUpdate(req.params.id, {
+      console.log("Inside unsubscribe, existinguser:", existingUser);
+
+      const existingChannel = await User.findByIdAndUpdate(req.params.id, {
         $inc: { subscribers: -1 },
       });
 
-      res.status(200).json("Subscription succesfull!");
+      console.log("Inside unsubscribe, existingChannel:", existingChannel);
+
+      const { password, ...userWithoutPassword } = existingUser._doc;
+
+      res.status(200).json({
+        message: "UnSubscription succesfull!",
+        user: userWithoutPassword,
+      });
     } catch (error) {
       return res.status(500).json({ message: "Something went wrong!" });
     }

@@ -57,11 +57,19 @@ module.exports = {
 
   getComments: async (req, res) => {
     try {
-      const comments = await Comment.find({ videoId: req.params.videoId });
+      const getComments = await Comment.find({ videoId: req.params.videoId });
 
-      if (comments.length === 0) {
+      if (getComments.length === 0) {
         return res.json({ status: 404, message: "THere are no comments!" });
       }
+
+      console.log("this is getComments:", getComments);
+
+      const comments = await getComments.sort(
+        (a, b) => b.createdAt - a.createdAt
+      );
+
+      console.log("this is comments:", comments);
 
       return res.json({
         status: 200,
@@ -69,6 +77,7 @@ module.exports = {
         comments,
       });
     } catch (error) {
+      console.log("this is error:", error);
       return res.json({
         status: 500,
         message: "Something wrong!",

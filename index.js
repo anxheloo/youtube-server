@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv"); // npm install dotenv
+const dotenv = require("dotenv").config(); // npm install dotenv
 const userRoute = require("./Routes/users");
 const commentRoute = require("./Routes/comments");
 const videoRoute = require("./Routes/videos");
@@ -8,11 +8,12 @@ const authRoute = require("./Routes/auth");
 const cookieParser = require("cookie-parser");
 const cors = require("cors"); // cors configuration
 const compression = require("compression"); // used for deployment to compress the routes
+const path = require("path");
 
 const app = express();
 dotenv.config();
 
-// app.use(cors())
+// app.use(cors());
 
 // Compress all routes
 // app.use(compression());
@@ -21,8 +22,10 @@ dotenv.config();
 app.use(
   cors({
     // origin: "http://192.168.1.236:3000",
+    // origin: "http://192.168.0.103:3000",
     // origin: "http://localhost:3000",
-    origin: "http://172.30.160.1:3000",
+    origin: "http://192.168.0.102:3000",
+    // origin: "http://172.30.160.1:3000",
     // origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
     credentials: true,
     // exposedHeaders: ["Set-Cookie"],
@@ -37,6 +40,9 @@ app.use(cookieParser());
 
 // Add this line to parse JSON bodies
 app.use(express.json());
+
+// serve static files in order for frontend to load content from backend
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 const connect = () => {
   mongoose

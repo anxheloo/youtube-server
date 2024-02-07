@@ -1,37 +1,11 @@
 const Video = require("../models/Video");
 const User = require("../models/User");
 
+const express = require("express");
+
 module.exports = {
   //create video
-  postVideo: async (req, res) => {
-    // const newVideo = new Video({
-    //   userId: req.user.id,
-    //   title: req.body.title,
-    //   description: req.body.description,
-    //   videoImg: req.body.videoImg,
-    //   videoUrl: req.body.videoUrl,
-    // });
-    const newVideo = new Video({
-      userId: req.user.id,
-      ...req.body,
-    });
-
-    try {
-      const saveVideo = await newVideo.save();
-
-      return res.json({
-        status: 200,
-        message: "New video saved!",
-        video: saveVideo,
-      });
-    } catch (error) {
-      return res.json({
-        status: 500,
-        message: "Something went wrong posting video!",
-        error: error,
-      });
-    }
-  },
+  postVideo: async (req, res) => {},
 
   // update video
   updateVideo: async (req, res) => {
@@ -189,11 +163,12 @@ module.exports = {
       const user = await User.findById(req.user.id);
       const subscribedChannels = user.subscribedUsers;
 
-      // console.log("this is subscribedChannels:", subscribedChannels);
+      console.log("this is subscribedChannels:", subscribedChannels);
 
       const list = await Promise.all(
-        subscribedChannels.map((channelId) => {
-          return Video.find({ userId: channelId });
+        subscribedChannels.map(async (channelId) => {
+          const videos = await Video.find({ userId: channelId });
+          return videos;
         })
       );
 
