@@ -8,6 +8,7 @@ const VideoSchema = new mongoose.Schema(
     },
     title: {
       type: String,
+      trim: true,
       required: true,
     },
     description: {
@@ -22,6 +23,10 @@ const VideoSchema = new mongoose.Schema(
     videoUrl: {
       type: String,
       required: true,
+    },
+    filename: {
+      type: String,
+      trim: true,
     },
 
     views: {

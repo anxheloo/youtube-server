@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv").config(); // npm install dotenv
+const dotenv = require("dotenv"); // npm install dotenv
 const userRoute = require("./Routes/users");
 const commentRoute = require("./Routes/comments");
 const videoRoute = require("./Routes/videos");

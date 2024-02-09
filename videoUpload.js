@@ -55,9 +55,7 @@ const fileFilter = (req, file, cb) => {
 // exports.videoUpload = multer({ storage, fileFilter });
 
 // Create the multer middleware with the defined storage and fileFilter
-exports.videoUpload = multer({ storage, fileFilter });
-
-// .fields([
-//     { name: "video", maxCount: 1 },
-//     { name: "image", maxCount: 1 },
-//   ]);
+exports.videoUpload = multer({ storage, fileFilter }).fields([
+  { name: "video", maxCount: 1 },
+  { name: "image", maxCount: 1 },
+]);

@@ -14,15 +14,20 @@ module.exports = {
     console.log("Token type:", typeof token);
     // console.log("THis is req:", req);
 
+    console.log("This is video!:", req.body.video);
+    console.log("Token type:", typeof req.body.video);
+
     if (!token) {
       return res.status(401).json("You are not authenticated");
     }
 
     jwt.verify(token, process.env.SECRET, async (err, user) => {
       if (err) {
+        console.log("This is error:", err);
         return res.status(403).json("Invalid token!");
       }
       req.user = user;
+      console.log("Inside verifyTOken:", req.user);
       next();
     });
   },

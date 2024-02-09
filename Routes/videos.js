@@ -2,20 +2,13 @@ const express = require("express");
 const videoController = require("../Controllers/video");
 const { verifyToken } = require("../verifyToken");
 const router = express.Router();
-const videoUpload = require("../videoUpload");
+const { videoUpload } = require("../videoUpload");
 
 router.get("/", videoController.getAllVideos);
 router.get("/tags", videoController.getByTag);
 router.get("/search", videoController.search);
 router.get("/:id", videoController.getVideo);
-router.post(
-  "/upload",
-  videoUpload.fields([
-    { name: "video", maxCount: 1 },
-    { name: "image", maxCount: 1 },
-  ]),
-  videoController.postVideo
-);
+router.post("/upload", verifyToken, videoUpload, videoController.postVideo);
 router.post("/subscriptions", verifyToken, videoController.subscriptions);
 // router.get("/subscriptions", verifyToken, videoController.subscriptions);
 router.post("/trend", videoController.trend);
