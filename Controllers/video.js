@@ -1,16 +1,28 @@
 const Video = require("../models/Video");
 const User = require("../models/User");
-
 const express = require("express");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   //create video
   postVideo: async (req, res) => {
-    const userId = req.user.id;
-    // userId
-    const { title, description } = req.body;
-    console.log("This is title, description:", title, description);
-    console.log("This is video, image:", req.body.video, req.body.image);
+    // const userId = req.user.id;
+
+    // const token = req.cookies.access_token;
+    const { title, description, token, videoTags } = req.body;
+
+    if (!token) {
+      return res.status(401).json("You are not authenticated");
+    }
+
+    jwt.verify(token, process.env.SECRET, async (err, user) => {
+      if (err) {
+        console.log("This is error:", err);
+        return res.status(403).json("Invalid token!");
+      }
+      // userId = req.user.id;
+      req.user = user;
+    });
 
     const file = req.files;
     console.log("this is file:", file);
@@ -21,32 +33,30 @@ module.exports = {
     // Watch the video of video upload on youtube and check the way he uploads a video
 
     try {
-      // const file = req.files;
-      // console.log("this is file:", file);
-      // const filename = req.files.video[0].filename;
-      // console.log("This is filename:", filename);
-      // const videoPath = req.files.video[0].path;
-      // console.log("This is videoPath:", videoPath);
-      // if (req.files.image) {
-      //   imageFilename = req.files.image[0].filename;
-      //   imagePath = req.files.image[0].path;
-      // }
-      // console.log("This is image filename:", imageFilename);
-      // console.log("This is image path:", imagePath);
-      // const video = new Video({
-      //   userId: userId,
-      //   title: title,
-      //   description: description,
-      //   videoImg: imagePath,
-      //   filename: filename,
-      //   videoUrl: videoPath,
-      // });
-      // console.log("This is video:", video);
-      // await video.save();
-      // res.status(200).json({
-      //   message: "Video saved successfully!",
-      //   "This is your video:": video,
-      // });
+      const filename = req.files.video[0].filename;
+      const videoPath = req.files.video[0].path;
+
+      console.log("This is videoPath:", videoPath);
+
+      if (req.files.image) {
+        imageFilename = req.files.image[0].filename;
+        imagePath = req.files.image[0].path;
+      }
+
+      const video = new Video({
+        userId: req.user.id,
+        title: title,
+        description: description,
+        videoImg: imagePath,
+        filename: filename,
+        videoUrl: videoPath,
+      });
+      console.log("This is video:", video);
+      await video.save();
+      res.status(200).json({
+        message: "Video saved successfully!",
+        "This is your video:": video,
+      });
     } catch (error) {
       res.status(400).json({ message: "Video upload failed", error });
       console.log(error);

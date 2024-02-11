@@ -8,7 +8,7 @@ router.get("/", videoController.getAllVideos);
 router.get("/tags", videoController.getByTag);
 router.get("/search", videoController.search);
 router.get("/:id", videoController.getVideo);
-router.post("/upload", verifyToken, videoUpload, videoController.postVideo);
+router.post("/upload", videoUpload, videoController.postVideo);
 router.post("/subscriptions", verifyToken, videoController.subscriptions);
 // router.get("/subscriptions", verifyToken, videoController.subscriptions);
 router.post("/trend", videoController.trend);

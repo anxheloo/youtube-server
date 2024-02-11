@@ -2,20 +2,15 @@ const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 
 module.exports = {
   verifyToken: async (req, res, next) => {
-    console.log("entering verify token");
     // const token = req.cookies.access_token;
     const token = req.body.token;
+    console.log("This is req.body:", req.body);
 
-    // const token = req.cookie.access_token;
+    // const authHeader = req.headers["authorization"];
+    // const token = authHeader && authHeader.split(" ")[1]; // Extracting the token from the header
 
-    console.log("THis is req.body:", req.body);
     // console.log("THESE is req.cookies:", req.cookies);
     console.log("This is token!:", token);
-    console.log("Token type:", typeof token);
-    // console.log("THis is req:", req);
-
-    console.log("This is video!:", req.body.video);
-    console.log("Token type:", typeof req.body.video);
 
     if (!token) {
       return res.status(401).json("You are not authenticated");
