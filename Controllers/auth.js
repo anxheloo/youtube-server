@@ -27,7 +27,7 @@ module.exports = {
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
       const newUser = new User({
-        name: req.body.name,
+        name: req.body.username,
         email: req.body.email,
         password: hashedPassword,
       });
@@ -58,7 +58,10 @@ module.exports = {
     try {
       const existingUser = await User.findOne({ email: req.body.email });
 
+      console.log("This is req.body:", req.body);
+
       if (!existingUser) {
+        console.log("Inside user not found");
         return res.status(404).json("User not found!");
       }
 

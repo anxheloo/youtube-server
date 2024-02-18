@@ -65,6 +65,7 @@ module.exports = {
 
       console.log("this is getComments:", getComments);
 
+      //Show latest comment first
       const comments = await getComments.sort(
         (a, b) => b.createdAt - a.createdAt
       );

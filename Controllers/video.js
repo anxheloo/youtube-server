@@ -182,7 +182,9 @@ module.exports = {
       //   return res.json({ status: 404, message: "Video not found!" });
       // }
 
-      res.status(200).json({ message: "The view has been increased!" });
+      res
+        .status(200)
+        .json({ message: "The view has been increased!", views: video.views });
     } catch (error) {
       return res.json({
         status: 500,
@@ -299,7 +301,7 @@ module.exports = {
         return res.json({ status: 404, message: "Video not found" });
       }
 
-      return res.json(videos);
+      return res.status(200).json(videos);
     } catch (error) {
       console.log(error);
       return res.json({
