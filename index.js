@@ -19,21 +19,21 @@ app.use(cors());
 // app.use(compression());
 
 // Add this line to configure cors
-// app.use(
-//   cors({
-//     // origin: "http://192.168.1.236:3000",
-//     // origin: "http://192.168.0.103:3000",
-//     // origin: "http://localhost:3000",
-//     origin: "http://192.168.0.102:3000",
-//     // origin: "http://172.30.160.1:3000",
-//     // origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
-//     credentials: true,
-//     // exposedHeaders: ["Set-Cookie"],
-//     // Additional options
-//     // sameSite: "None", // You might need to adjust this based on browser compatibility
-//     // secure: true,
-//   })
-// );
+app.use(
+  cors({
+    // origin: "http://192.168.1.236:3000",
+    // origin: "http://192.168.0.103:3000",
+    // origin: "http://localhost:3000",
+    origin: "http://192.168.0.102:3000",
+    // origin: "http://172.30.160.1:3000",
+    // origin: "https://vermillion-gumdrop-dcc65b.netlify.app",
+    credentials: true,
+    // exposedHeaders: ["Set-Cookie"],
+    // Additional options
+    // sameSite: "None", // You might need to adjust this based on browser compatibility
+    // secure: true,
+  })
+);
 
 // Same as json parser we used cookie parser to send token using cookies.  npm install cookie-parser
 app.use(cookieParser());

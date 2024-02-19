@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken"); //npm install jsonwebtoken
 
 module.exports = {
   verifyToken: async (req, res, next) => {
-    // const token = req.cookies.access_token;
-    const token = req.body.token;
-    console.log("This is req.body:", req.body);
+    const token = req.cookies.access_token;
+
+    // const token = req.body.token;
+    // console.log("This is req.body:", req.body);
 
     // const authHeader = req.headers["authorization"];
     // const token = authHeader && authHeader.split(" ")[1]; // Extracting the token from the header
