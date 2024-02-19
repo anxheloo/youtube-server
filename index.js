@@ -33,7 +33,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "https://resonant-florentine-966fca.netlify.app",
+    origin: "https://preeminent-melomakarona-b4e08a.netlify.app/",
     credentials: true,
   })
 );
