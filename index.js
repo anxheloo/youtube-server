@@ -33,7 +33,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "https://preeminent-melomakarona-b4e08a.netlify.app",
+    origin: "https://precious-manatee-6e231b.netlify.app",
     credentials: true,
   })
 );
