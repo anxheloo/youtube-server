@@ -13,21 +13,28 @@ const path = require("path");
 const app = express();
 dotenv.config();
 
-app.use(cors());
+// app.use(cors());
 
 // Compress all routes
 // app.use(compression());
 
 // Add this line to configure cors
+// app.use(
+//   cors({
+//     // origin: "http://192.168.0.102:3000",
+//     origin: "https://resonant-florentine-966fca.netlify.app/",
+//     credentials: true,
+//     // exposedHeaders: ["Set-Cookie"],
+//     // Additional options
+//     // sameSite: "None", // You might need to adjust this based on browser compatibility
+//     // secure: true,
+//   })
+// );
+
 app.use(
   cors({
-    // origin: "http://192.168.0.102:3000",
-    origin: "https://resonant-florentine-966fca.netlify.app/",
+    origin: "https://resonant-florentine-966fca.netlify.app",
     credentials: true,
-    // exposedHeaders: ["Set-Cookie"],
-    // Additional options
-    sameSite: "None", // You might need to adjust this based on browser compatibility
-    secure: true,
   })
 );
 
